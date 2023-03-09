@@ -1,6 +1,7 @@
 import { usersCollection } from '$lib/Firebase';
 import { Timestamp, GeoPoint } from "firebase-admin/firestore";
-import IPinfoWrapper from 'node-ipinfo';
+import { IPinfoWrapper } from 'node-ipinfo';
+import { json } from "@sveltejs/kit";
 import { getOnlineUsers } from "$lib/utils";
 import type { RequestEvent } from './$types';
 import { IPINFO_TOKEN } from "$env/static/private";
@@ -43,5 +44,5 @@ export async function GET(requestEvent: RequestEvent) {
     peers: onlineUsers
   }
 
-  return new Response(JSON.stringify(returnData));
+  return json(returnData);
 }
