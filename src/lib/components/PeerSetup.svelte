@@ -14,14 +14,9 @@
 	// 	$connectionStateStore.firstLoad = false;
 	// });
 
-	const getPeerID = async (): Promise<string> => {
-		if (peer.id !== undefined) return Promise.resolve(peer.id);
-		return new Promise((resolve) => {
-			peer.on('open', (id) => {
-				console.log('openin da connection');
-				resolve(id);
-			});
-		});
+	const handleMessage = (message: string) => {
+		$connectionStateStore.messagesHistory = [...$connectionStateStore.messagesHistory, message];
+		console.log(message);
 	};
 
 	const connectPeers = (peers: string[]) => {
@@ -36,11 +31,7 @@
 				];
 			});
 			dataConnection.on('data', (data) => {
-				$connectionStateStore.messagesHistory = [
-					...$connectionStateStore.messagesHistory,
-					String(data)
-				];
-				console.log(data);
+				handleMessage(String(data));
 			});
 		});
 	};
@@ -77,11 +68,7 @@
 					dataConnection
 				];
 				dataConnection.on('data', (data) => {
-					$connectionStateStore.messagesHistory = [
-						...$connectionStateStore.messagesHistory,
-						String(data)
-					];
-					console.log(data);
+					handleMessage(String(data));
 				});
 			});
 			dataConnection.on('close', () => {
@@ -91,8 +78,6 @@
 				);
 			});
 		});
-		// const peerid = await getPeerID();
-		// $connectionStateStore.peerid = $connectionStateStore.peerid;
 	};
 
 	const handleReconnect = async () => {
