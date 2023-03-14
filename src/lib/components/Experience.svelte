@@ -7,25 +7,12 @@
 	import landscapeFragment from '$lib/shaders/landscapeFragment.glsl?raw';
 	import planeVertex from '$lib/shaders/planeVertex.glsl?raw';
 	import planeFragment from '$lib/shaders/planeFragment.glsl?raw';
-  import { jump } from '$lib/stores';
+	import { cameraPosition } from '$lib/stores';
 
 	let landscapeMaterial: ShaderMaterial;
 	let landscapeMaterial2: ShaderMaterial;
 	let landscapeMaterial3: ShaderMaterial;
 	let planeMaterial: ShaderMaterial;
-
-  let wen = true;
-  const jumpYo = () =>{
-    if(wen){
-      jump.set(40);
-      wen = false;
-    }else{
-      jump.set(0);
-      wen = true;
-    }
-    setTimeout(jumpYo, 2000);
-  }
-  // setTimeout(jumpYo,1000);
 
 	useFrame(({ clock }, delta) => {
 		landscapeMaterial.uniforms.uTime.value += delta;
@@ -39,7 +26,7 @@
 </script>
 
 <T.Color args={['#010101']} attach="background" />
-<T.PerspectiveCamera makeDefault position={[0, $jump, 50]} fov={24}>
+<T.PerspectiveCamera makeDefault position={$cameraPosition} fov={24}>
 	<OrbitControls
 		maxPolarAngle={degToRad(180)}
 		enableZoom={true}

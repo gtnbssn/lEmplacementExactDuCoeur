@@ -3,6 +3,7 @@
 	import Peer from 'peerjs';
 	import VisibilityChange from 'svelte-visibility-change';
 	import { connectionStateStore, sendMessageToPeers } from '$lib/stores';
+	import { monochrome } from '$lib/stores';
 
 	let visibilityState: 'visible' | 'hidden';
 
@@ -67,6 +68,8 @@
 					...$connectionStateStore.peerConnections,
 					dataConnection
 				];
+				monochrome.set(1);
+				setTimeout(() => monochrome.set(0), 150);
 				dataConnection.on('data', (data) => {
 					handleMessage(String(data));
 				});

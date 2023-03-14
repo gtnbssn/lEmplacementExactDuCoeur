@@ -18,10 +18,12 @@ export const jump = tweened(0, {
   easing: cubicOut
 });
 
-export const cameraPosition = spring([0, 0, 50], {
+const startPosition: [x: number, y: number, z: number] = [0, 0, 50];
+
+export const cameraPosition = spring(startPosition, {
   stiffness: 0.15,
   damping: 0.4
-})
+});
 
 export const monochrome = writable(0);
 
