@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { T, OrbitControls, useFrame } from '@threlte/core';
+	import { Vector2 } from 'three';
 	import type { ShaderMaterial } from 'three';
 	import { degToRad } from 'three/src/math/MathUtils';
 	import PostProcessing from '$lib/components/PostProcessing.svelte';
@@ -7,7 +8,7 @@
 	import landscapeFragment from '$lib/shaders/landscapeFragment.glsl?raw';
 	import planeVertex from '$lib/shaders/planeVertex.glsl?raw';
 	import planeFragment from '$lib/shaders/planeFragment.glsl?raw';
-	import { cameraPosition } from '$lib/stores';
+	import { cameraPosition, baseHue, baseHue2, baseHue3, hueSpread, saturation } from '$lib/stores';
 
 	let landscapeMaterial: ShaderMaterial;
 	let landscapeMaterial2: ShaderMaterial;
@@ -18,6 +19,15 @@
 		landscapeMaterial.uniforms.uTime.value += delta;
 		landscapeMaterial2.uniforms.uTime.value += delta * 1.2;
 		landscapeMaterial3.uniforms.uTime.value += delta * 0.8;
+		landscapeMaterial.uniforms.uBaseHue.value = $baseHue;
+		landscapeMaterial2.uniforms.uBaseHue.value = $baseHue2;
+		landscapeMaterial3.uniforms.uBaseHue.value = $baseHue3;
+		landscapeMaterial.uniforms.uHueSpread.value = $hueSpread;
+		landscapeMaterial2.uniforms.uHueSpread.value = $hueSpread;
+		landscapeMaterial3.uniforms.uHueSpread.value = $hueSpread;
+		landscapeMaterial.uniforms.uSaturation.value = $saturation;
+		landscapeMaterial2.uniforms.uSaturation.value = $saturation;
+		landscapeMaterial3.uniforms.uSaturation.value = $saturation;
 		planeMaterial.uniforms.uTime.value += delta;
 		if (Math.floor(clock.getElapsedTime()) % 2 == 0) {
 			// console.log(`beh ${clock.getElapsedTime()}`);
@@ -26,7 +36,11 @@
 </script>
 
 <T.Color args={['#010101']} attach="background" />
-<T.PerspectiveCamera makeDefault position={$cameraPosition} fov={24}>
+<T.PerspectiveCamera
+	makeDefault
+	position={[$cameraPosition.x, $cameraPosition.y, $cameraPosition.z]}
+	fov={24}
+>
 	<OrbitControls
 		maxPolarAngle={degToRad(180)}
 		enableZoom={true}
@@ -41,7 +55,12 @@
 		bind:ref={landscapeMaterial3}
 		vertexShader={landscapeVertex}
 		fragmentShader={landscapeFragment}
-		uniforms={{ uTime: { value: 7.0 } }}
+		uniforms={{
+			uTime: { value: 7.0 },
+			uBaseHue: { value: 0.2 },
+			uHueSpread: { value: 0.2 },
+			uSaturation: { value: 0.5 }
+		}}
 	/>
 </T.Mesh>
 
@@ -51,7 +70,12 @@
 		bind:ref={landscapeMaterial2}
 		vertexShader={landscapeVertex}
 		fragmentShader={landscapeFragment}
-		uniforms={{ uTime: { value: 3.0 } }}
+		uniforms={{
+			uTime: { value: 3.0 },
+			uBaseHue: { value: 0.5 },
+			uHueSpread: { value: 0.2 },
+			uSaturation: { value: 0.5 }
+		}}
 	/>
 </T.Mesh>
 
@@ -61,7 +85,12 @@
 		bind:ref={landscapeMaterial}
 		vertexShader={landscapeVertex}
 		fragmentShader={landscapeFragment}
-		uniforms={{ uTime: { value: 0.0 } }}
+		uniforms={{
+			uTime: { value: 0.0 },
+			uBaseHue: { value: 0.7 },
+			uHueSpread: { value: 0.2 },
+			uSaturation: { value: 0.5 }
+		}}
 	/>
 </T.Mesh>
 
@@ -71,7 +100,12 @@
 		bind:ref={landscapeMaterial2}
 		vertexShader={landscapeVertex}
 		fragmentShader={landscapeFragment}
-		uniforms={{ uTime: { value: 3.0 } }}
+		uniforms={{
+			uTime: { value: 3.0 },
+			uBaseHue: { value: 0.5 },
+			uHueSpread: { value: 0.2 },
+			uSaturation: { value: 0.5 }
+		}}
 	/>
 </T.Mesh>
 
@@ -81,7 +115,12 @@
 		bind:ref={landscapeMaterial3}
 		vertexShader={landscapeVertex}
 		fragmentShader={landscapeFragment}
-		uniforms={{ uTime: { value: 3.0 } }}
+		uniforms={{
+			uTime: { value: 3.0 },
+			uBaseHue: { value: 0.2 },
+			uHueSpread: { value: 0.2 },
+			uSaturation: { value: 0.5 }
+		}}
 	/>
 </T.Mesh>
 
@@ -91,7 +130,7 @@
 		bind:ref={planeMaterial}
 		vertexShader={planeVertex}
 		fragmentShader={planeFragment}
-		uniforms={{ uTime: { value: 0.0 } }}
+		uniforms={{ uTime: { value: 0.0 }, uFrequency: { value: new Vector2(10, 6) } }}
 		wireframe
 	/>
 </T.Mesh>

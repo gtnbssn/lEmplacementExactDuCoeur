@@ -1,6 +1,8 @@
 /* precision mediump float; */
-
 uniform float uTime;
+uniform float uBaseHue;
+uniform float uHueSpread;
+uniform float uSaturation;
 
 varying vec2 vUv;
 /* varying float vRandom; */
@@ -119,7 +121,7 @@ void main()
   float colorG = clamp(snoise(vec2(vUv.y + sin(uTime * 0.10), vUv.x + cos(uTime * 0.07))), 0.9, 1.);
   float colorB = clamp(snoise(vec2(vUv.x + cos(uTime * 0.06), vUv.y + sin(uTime * 0.05))), 0., 1.);
   gl_FragColor = vec4(colorR * vElevation, colorG * vElevation, colorB * vElevation, 1.0); */
-  vec2 fbmvUv = vec2(fbm(vUv.xx),fbm(vUv.yy));
-  float hue = snoise(vec2(fbmvUv.x + sin(uTime * 0.10), fbmvUv.y + cos(uTime * 0.06))) * 0.2 + 0.7;
-  gl_FragColor = vec4(hsl2rgb(hue, 1., 0.5),1.0);
+  /* vec2 fbmvUv = vec2(fbm(vUv.xx),fbm(vUv.yy)); */
+  float hue = snoise(vec2(vUv.x + sin(uTime * 0.10), vUv.y + cos(uTime * 0.06))) * uHueSpread + uBaseHue;
+  gl_FragColor = vec4(hsl2rgb(hue, uSaturation, 0.5),1.0);
 }

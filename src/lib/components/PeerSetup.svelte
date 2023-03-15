@@ -3,7 +3,16 @@
 	import Peer from 'peerjs';
 	import VisibilityChange from 'svelte-visibility-change';
 	import { connectionStateStore, sendMessageToPeers } from '$lib/stores';
-	import { monochrome } from '$lib/stores';
+	import {
+		monochrome,
+		cameraPosition,
+		baseHue,
+		baseHue2,
+		baseHue3,
+		hueSpread,
+		saturation
+	} from '$lib/stores';
+	import { base } from '$app/paths';
 
 	let visibilityState: 'visible' | 'hidden';
 
@@ -15,9 +24,59 @@
 	// 	$connectionStateStore.firstLoad = false;
 	// });
 
+	const reset = () => {
+		cameraPosition.set({ x: 0, y: 0, z: 50 });
+		baseHue.set(0.7);
+		baseHue2.set(0.5);
+		baseHue3.set(0.2);
+		hueSpread.set(0.2);
+		saturation.set(0.5);
+	};
+
 	const handleMessage = (message: string) => {
-		$connectionStateStore.messagesHistory = [...$connectionStateStore.messagesHistory, message];
+		// $connectionStateStore.messagesHistory = [...$connectionStateStore.messagesHistory, message];
 		console.log(message);
+		switch (message) {
+			case '1':
+				reset();
+				break;
+			case '2':
+				const newX = Math.random() * 100 - 50;
+				cameraPosition.set({ x: newX, y: $cameraPosition.y, z: $cameraPosition.z });
+				break;
+			case '3':
+				const newY = Math.random() * 100 - 50;
+				cameraPosition.set({ x: $cameraPosition.x, y: newY, z: $cameraPosition.z });
+				break;
+			case '4':
+				const newZ = Math.random() * 40 + 30;
+				cameraPosition.set({ x: $cameraPosition.x, y: $cameraPosition.y, z: newZ });
+				break;
+			case '5':
+				const newBaseHue = Math.random() * 0.8 + 0.1;
+				baseHue.set(newBaseHue);
+				break;
+			case '6':
+				const newBaseHue2 = Math.random() * 0.8 + 0.1;
+				baseHue2.set(newBaseHue2);
+				break;
+			case '7':
+				const newBaseHue3 = Math.random() * 0.8 + 0.1;
+				baseHue3.set(newBaseHue3);
+				break;
+			case '8':
+				const newHueSpread = Math.random() * 0.5;
+				hueSpread.set(newHueSpread);
+				break;
+			case '9':
+				const newSaturation = Math.random() * 0.8 + 0.2;
+				saturation.set(newSaturation);
+				break;
+
+			default:
+				reset();
+				break;
+		}
 	};
 
 	const connectPeers = (peers: string[]) => {
@@ -69,13 +128,16 @@
 					dataConnection
 				];
 				monochrome.set(1);
-				setTimeout(() => monochrome.set(0), 150);
+				setTimeout(() => monochrome.set(0), 250);
 				dataConnection.on('data', (data) => {
 					handleMessage(String(data));
 				});
 			});
 			dataConnection.on('close', () => {
 				console.log(`${dataConnection.peer} has closed the connection`);
+				monochrome.set(1);
+				setTimeout(() => monochrome.set(0), 250);
+				reset();
 				$connectionStateStore.peerConnections = $connectionStateStore.peerConnections.filter(
 					(peerConnection) => peerConnection.peer != dataConnection.peer
 				);
