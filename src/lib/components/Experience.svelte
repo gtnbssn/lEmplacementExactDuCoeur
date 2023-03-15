@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { T, OrbitControls, useFrame } from '@threlte/core';
+	import { T, OrbitControls, useFrame, TransformableObject, useThrelte } from '@threlte/core';
 	import { Vector2 } from 'three';
 	import type { ShaderMaterial } from 'three';
 	import { degToRad } from 'three/src/math/MathUtils';
@@ -10,6 +10,7 @@
 	import planeFragment from '$lib/shaders/planeFragment.glsl?raw';
 	import { cameraPosition, baseHue, baseHue2, baseHue3, hueSpread, saturation } from '$lib/stores';
 
+	const { camera } = useThrelte();
 	let landscapeMaterial: ShaderMaterial;
 	let landscapeMaterial2: ShaderMaterial;
 	let landscapeMaterial3: ShaderMaterial;
@@ -124,14 +125,17 @@
 	/>
 </T.Mesh>
 
-<T.Mesh>
-	<T.PlaneGeometry args={[100, 100, 32, 32]} />
-	<T.ShaderMaterial
-		bind:ref={planeMaterial}
-		vertexShader={planeVertex}
-		fragmentShader={planeFragment}
-		uniforms={{ uTime: { value: 0.0 }, uFrequency: { value: new Vector2(10, 6) } }}
-		wireframe
-	/>
-</T.Mesh>
+<T.Group let:ref>
+	<TransformableObject object={ref} lookAt={$camera} />
+	<T.Mesh>
+		<T.PlaneGeometry args={[100, 100, 32, 32]} />
+		<T.ShaderMaterial
+			bind:ref={planeMaterial}
+			vertexShader={planeVertex}
+			fragmentShader={planeFragment}
+			uniforms={{ uTime: { value: 0.0 } }}
+			wireframe
+		/>
+	</T.Mesh>
+</T.Group>
 <PostProcessing />

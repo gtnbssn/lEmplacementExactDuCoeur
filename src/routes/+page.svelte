@@ -3,7 +3,6 @@
 	import PeerSetup from '$lib/components/PeerSetup.svelte';
 	import Experience from '$lib/components/Experience.svelte';
 	import Perf from '$lib/components/perf.svelte';
-	import Moves from '$lib/components/Moves.svelte';
 	import TestComm from '$lib/components/TestComm.svelte';
 </script>
 

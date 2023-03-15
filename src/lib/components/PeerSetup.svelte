@@ -12,7 +12,6 @@
 		hueSpread,
 		saturation
 	} from '$lib/stores';
-	import { base } from '$app/paths';
 
 	let visibilityState: 'visible' | 'hidden';
 
@@ -185,6 +184,21 @@
 		setTimeout(sendMessage, randomDelay);
 	};
 	setTimeout(sendMessage, 1000);
+
+	const ping = async () => {
+		if (visibilityState == 'visible') {
+			await fetch(`/api/ping?userid=${$connectionStateStore.userid}`);
+		}
+		setTimeout(ping, 3000);
+	};
+	setTimeout(ping, 3000);
+
+	const clearStalePeers = async () => {
+		await fetch(`/api/clear`);
+		console.log('clear emmmm');
+		setTimeout(clearStalePeers, 9000);
+	};
+	setTimeout(clearStalePeers, 9000);
 </script>
 
 <svelte:window on:beforeunload={handleDisconnect} />
