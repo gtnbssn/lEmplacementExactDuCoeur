@@ -162,7 +162,8 @@
 		}
 		$connectionStateStore.peerConnections.forEach((peerConnection) => peerConnection.close());
 		$connectionStateStore.peerConnections = [];
-		await fetch(`/api/disconnect?userid=${$connectionStateStore.userid}`);
+		navigator.sendBeacon(`/api/disconnect?userid=${$connectionStateStore.userid}`);
+		// await fetch(`/api/disconnect?userid=${$connectionStateStore.userid}`);
 		console.log('disconnecting');
 		return 'disconnected';
 	};
