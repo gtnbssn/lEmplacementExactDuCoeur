@@ -4,11 +4,25 @@
 	import Experience from '$lib/components/Experience.svelte';
 	import Share from '$lib/components/Share.svelte';
 	import Perf from '$lib/components/perf.svelte';
+	import { deviceAcceleration } from '$lib/stores';
+
+	const handleMotion = (evt: DeviceMotionEvent) => {
+		if (evt.acceleration) {
+			deviceAcceleration.set({
+				x: evt.acceleration.x || 0,
+				y: evt.acceleration.y || 0,
+				z: evt.acceleration.z || 0
+			});
+		}
+	};
+	const start = function () {
+		window.addEventListener('devicemotion', handleMotion);
+	};
 </script>
 
 <PeerSetup />
 <div>
-	<Canvas shadows={false} rendererParameters={{ antialias: false }}>
+	<Canvas shadows={false} rendererParameters={{ antialias: false }} on:click={start}>
 		<Experience />
 		<Perf />
 	</Canvas>

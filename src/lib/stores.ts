@@ -20,6 +20,10 @@ export const cameraPosition = tweened(startPosition, {
   easing: sineInOut
 });
 
+const startDeviceAcceleration: { x: number, y: number, z: number } = { x: 0, y: 0, z: 70 };
+
+export const deviceAcceleration = writable(startDeviceAcceleration);
+
 export const monochrome = writable(0);
 
 export const baseHue = tweened(0.7, {

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { T, OrbitControls, useFrame, TransformableObject, useThrelte } from '@threlte/core';
-	import { Vector2 } from 'three';
 	import type { ShaderMaterial } from 'three';
 	import { degToRad } from 'three/src/math/MathUtils';
 	import PostProcessing from '$lib/components/PostProcessing.svelte';
@@ -16,7 +15,8 @@
 		hueSpread,
 		saturation,
 		alpha,
-		planePositionsStore
+		planePositionsStore,
+		deviceAcceleration
 	} from '$lib/stores';
 
 	const { camera } = useThrelte();
@@ -47,7 +47,11 @@
 <T.Color args={['#010101']} attach="background" />
 <T.PerspectiveCamera
 	makeDefault
-	position={[$cameraPosition.x, $cameraPosition.y, $cameraPosition.z]}
+	position={[
+		$cameraPosition.x + $deviceAcceleration.x,
+		$cameraPosition.y + $deviceAcceleration.y,
+		$cameraPosition.z + $deviceAcceleration.z
+	]}
 	fov={24}
 >
 	<OrbitControls
