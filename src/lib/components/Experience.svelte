@@ -26,6 +26,8 @@
 	let planeMaterial: ShaderMaterial;
 	let planeMaterial2: ShaderMaterial;
 
+	let cameraRotation = { x: 0, y: 0, z: 0 };
+
 	useFrame((_, delta) => {
 		landscapeMaterial.uniforms.uTime.value += delta;
 		landscapeMaterial2.uniforms.uTime.value += delta * 1.2;
@@ -41,6 +43,11 @@
 		landscapeMaterial3.uniforms.uSaturation.value = $saturation;
 		planeMaterial.uniforms.uTime.value += delta;
 		planeMaterial2.uniforms.uAlpha.value = $alpha;
+		cameraRotation = {
+			x: $camera.rotation.x,
+			y: $camera.rotation.y,
+			z: $camera.rotation.z
+		};
 	});
 </script>
 
@@ -48,18 +55,18 @@
 <T.PerspectiveCamera
 	makeDefault
 	position={[
-		$cameraPosition.x + $deviceAcceleration.x * 1.0,
-		$cameraPosition.y + $deviceAcceleration.y * 1.0,
-		$cameraPosition.z + $deviceAcceleration.z * 0.6
+		$cameraPosition.x + $deviceAcceleration.x * 0.8,
+		$cameraPosition.y + $deviceAcceleration.y * 0.8,
+		$cameraPosition.z + $deviceAcceleration.z * 0.7
+	]}
+	rotation={[
+		cameraRotation.x + $deviceAcceleration.beta,
+		cameraRotation.y + $deviceAcceleration.alpha,
+		cameraRotation.z + $deviceAcceleration.gamma
 	]}
 	fov={24}
 >
-	<!-- <OrbitControls -->
-	<!-- 	maxPolarAngle={degToRad(180)} -->
-	<!-- 	enableZoom={true} -->
-	<!-- 	target={{ y: 0.5 }} -->
-	<!-- 	enableDamping -->
-	<!-- /> -->
+	<OrbitControls maxPolarAngle={degToRad(180)} target={{ y: 0 }} enabled={false} enableDamping />
 </T.PerspectiveCamera>
 
 <T.Mesh position={[0, 10, 0]} rotation.x={-Math.PI * 0.5}>
