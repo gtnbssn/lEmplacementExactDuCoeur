@@ -19,7 +19,7 @@
 	let peer: Peer;
 
 	const reset = () => {
-		cameraPosition.set({ x: 0, y: 0, z: 50 });
+		cameraPosition.set({ x: 0, y: 0, z: 70 });
 		baseHue.set(0.7);
 		baseHue2.set(0.5);
 		baseHue3.set(0.2);
@@ -47,7 +47,7 @@
 				cameraPosition.set({ x: $cameraPosition.x, y: newY, z: $cameraPosition.z });
 				break;
 			case '4':
-				const newZ = Math.random() * 40 + 30;
+				const newZ = Math.random() * 40 + 40;
 				cameraPosition.set({ x: $cameraPosition.x, y: $cameraPosition.y, z: newZ });
 				break;
 			case '5':
