@@ -21,7 +21,7 @@
 </script>
 
 <PeerSetup />
-<div on:touchstart|once={start}>
+<div on:touchstart|once|stopPropagation|preventDefault={start}>
 	<Canvas shadows={false} rendererParameters={{ antialias: false }}>
 		<Experience />
 		<Perf />
