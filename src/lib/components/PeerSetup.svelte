@@ -183,12 +183,6 @@
 		setTimeout(ping, 3000);
 	};
 	setTimeout(ping, 3000);
-
-	const clearStalePeers = async () => {
-		await fetch(`/api/clear`);
-		setTimeout(clearStalePeers, 9000);
-	};
-	setTimeout(clearStalePeers, 9000);
 </script>
 
 <svelte:window on:beforeunload={handleDisconnect} />

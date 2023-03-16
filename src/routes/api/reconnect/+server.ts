@@ -1,6 +1,6 @@
 import { json } from "@sveltejs/kit";
 import { usersCollection } from '$lib/Firebase';
-import { getOnlineUsers } from "$lib/utils";
+import { getOnlineUsers, clearStaleUsers } from "$lib/utils";
 import type { RequestEvent } from './$types';
 
 const reconnectUser = (userId: string) => {
@@ -9,6 +9,7 @@ const reconnectUser = (userId: string) => {
 };
 
 export async function GET(requestEvent: RequestEvent) {
+  await clearStaleUsers();
   reconnectUser(String(requestEvent.url.searchParams.get('userid')));
   const onlineUsers = await getOnlineUsers();
   const returnData = {
