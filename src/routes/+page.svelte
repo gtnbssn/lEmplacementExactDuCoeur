@@ -11,20 +11,24 @@
 			deviceAcceleration.set({
 				x: evt.acceleration.x || 0,
 				y: evt.acceleration.y || 0,
-				z: evt.acceleration.z || 0
+				z: evt.acceleration.z || 0,
+				alpha: evt.rotationRate?.alpha || 0,
+				beta: evt.rotationRate?.beta || 0,
+				gamma: evt.rotationRate?.gamma || 0
 			});
 		}
 	};
 	const start = () => {
-		alert("let's goooo");
+		alert(DeviceMotionEvent.requestPermission);
 		if (typeof DeviceMotionEvent.requestPermission === 'function') {
 			DeviceMotionEvent.requestPermission()
 				.then((response) => {
 					if (response == 'granted') {
+						alert('granted');
 						window.addEventListener('devicemotion', handleMotion);
 					}
 				})
-				.catch(console.error);
+				.catch(alert);
 		} else {
 			window.addEventListener('devicemotion', handleMotion);
 		}
