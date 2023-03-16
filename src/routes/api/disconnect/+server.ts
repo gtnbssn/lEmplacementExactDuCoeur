@@ -9,7 +9,7 @@ const disconnectUser = (userId: string) => {
   }
 };
 
-export async function GET(requestEvent: RequestEvent) {
+export async function POST(requestEvent: RequestEvent) {
   disconnectUser(String(requestEvent.url.searchParams.get('userid')));
   return new Response('oy');
 }
