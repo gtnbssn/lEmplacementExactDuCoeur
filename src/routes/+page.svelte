@@ -17,7 +17,7 @@
 	};
 	const start = () => {
 		alert("let's goooo");
-		if (DeviceMotionEvent.requestPermission) {
+		if (typeof DeviceMotionEvent.requestPermission === 'function') {
 			DeviceMotionEvent.requestPermission()
 				.then((response) => {
 					if (response == 'granted') {
