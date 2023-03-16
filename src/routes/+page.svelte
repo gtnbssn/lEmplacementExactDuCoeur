@@ -16,7 +16,18 @@
 		}
 	};
 	const start = () => {
-		window.addEventListener('devicemotion', handleMotion);
+		alert("let's goooo");
+		if (DeviceMotionEvent.requestPermission) {
+			DeviceMotionEvent.requestPermission()
+				.then((response) => {
+					if (response == 'granted') {
+						window.addEventListener('devicemotion', handleMotion);
+					}
+				})
+				.catch(console.error);
+		} else {
+			window.addEventListener('devicemotion', handleMotion);
+		}
 	};
 </script>
 

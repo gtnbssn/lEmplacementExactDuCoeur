@@ -22,7 +22,10 @@ export const cameraPosition = tweened(startPosition, {
 
 const startDeviceAcceleration: { x: number, y: number, z: number } = { x: 0, y: 0, z: 0 };
 
-export const deviceAcceleration = writable(startDeviceAcceleration);
+export const deviceAcceleration = spring(startDeviceAcceleration, {
+  stiffness: 0.17,
+  damping: 0.4
+});
 
 export const monochrome = writable(0);
 

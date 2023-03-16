@@ -48,9 +48,9 @@
 <T.PerspectiveCamera
 	makeDefault
 	position={[
-		$cameraPosition.x + $deviceAcceleration.x,
-		$cameraPosition.y + $deviceAcceleration.y,
-		$cameraPosition.z + $deviceAcceleration.z
+		$cameraPosition.x + $deviceAcceleration.x * 0.4,
+		$cameraPosition.y + $deviceAcceleration.y * 0.4,
+		$cameraPosition.z + $deviceAcceleration.z * 0.4
 	]}
 	fov={24}
 >
