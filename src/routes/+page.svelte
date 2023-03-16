@@ -16,13 +16,12 @@
 		}
 	};
 	const start = () => {
-		alert("let's gooo");
 		window.addEventListener('devicemotion', handleMotion);
 	};
 </script>
 
 <PeerSetup />
-<div on:pointerdown={start}>
+<div on:touchstart|once={start}>
 	<Canvas shadows={false} rendererParameters={{ antialias: false }}>
 		<Experience />
 		<Perf />
