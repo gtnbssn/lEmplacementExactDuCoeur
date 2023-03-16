@@ -22,8 +22,8 @@
 </script>
 
 <PeerSetup />
-<div>
-	<Canvas shadows={false} rendererParameters={{ antialias: false }} on:click={start}>
+<div on:click={start}>
+	<Canvas shadows={false} rendererParameters={{ antialias: false }}>
 		<Experience />
 		<Perf />
 	</Canvas>
