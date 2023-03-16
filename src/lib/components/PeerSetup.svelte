@@ -10,18 +10,13 @@
 		baseHue2,
 		baseHue3,
 		hueSpread,
-		saturation
+		saturation,
+		alpha
 	} from '$lib/stores';
 
 	let visibilityState: 'visible' | 'hidden';
 
 	let peer: Peer;
-
-	// peer.on('open', (id) => {
-	// 	$connectionStateStore.peerid = id;
-	// 	handleConnect(id);
-	// 	$connectionStateStore.firstLoad = false;
-	// });
 
 	const reset = () => {
 		cameraPosition.set({ x: 0, y: 0, z: 50 });
@@ -32,8 +27,12 @@
 		saturation.set(0.5);
 	};
 
+	const blink = () => {
+		monochrome.set(1);
+		setTimeout(() => monochrome.set(0), 250);
+		alpha.set(1);
+	};
 	const handleMessage = (message: string) => {
-		// $connectionStateStore.messagesHistory = [...$connectionStateStore.messagesHistory, message];
 		console.log(message);
 		switch (message) {
 			case '1':
@@ -71,7 +70,6 @@
 				const newSaturation = Math.random() * 0.8 + 0.2;
 				saturation.set(newSaturation);
 				break;
-
 			default:
 				reset();
 				break;
@@ -104,7 +102,6 @@
 				]
 			}
 		});
-		// peer = new Peer();
 		peer.on('open', (id) => {
 			$connectionStateStore.peerid = id;
 			fetch(`/api/connect?peerid=${$connectionStateStore.peerid}`)
@@ -112,8 +109,6 @@
 				.then((json) => {
 					console.log(`peerid is ${$connectionStateStore.peerid}`);
 					console.log('connecting');
-					console.log(`json sent by the connect endpoint:`);
-					console.log(json);
 					$connectionStateStore.userid = json.currentUserId;
 					connectPeers(json.peers as string[]);
 				});
@@ -126,16 +121,14 @@
 					...$connectionStateStore.peerConnections,
 					dataConnection
 				];
-				monochrome.set(1);
-				setTimeout(() => monochrome.set(0), 250);
+				blink();
 				dataConnection.on('data', (data) => {
 					handleMessage(String(data));
 				});
 			});
 			dataConnection.on('close', () => {
 				console.log(`${dataConnection.peer} has closed the connection`);
-				monochrome.set(1);
-				setTimeout(() => monochrome.set(0), 250);
+				blink();
 				reset();
 				$connectionStateStore.peerConnections = $connectionStateStore.peerConnections.filter(
 					(peerConnection) => peerConnection.peer != dataConnection.peer
@@ -151,7 +144,6 @@
 		const res = await fetch(`/api/reconnect?userid=${$connectionStateStore.userid}`);
 		const json = await res.json();
 		console.log(`reconnecting ${$connectionStateStore.userid}`);
-		console.log(json);
 		connectPeers(json.peers);
 	};
 
@@ -163,7 +155,6 @@
 		$connectionStateStore.peerConnections = [];
 		await fetch(`/api/disconnect?userid=${$connectionStateStore.userid}`);
 		console.log('disconnecting');
-		console.log($connectionStateStore);
 		return 'disconnected';
 	};
 
@@ -195,7 +186,6 @@
 
 	const clearStalePeers = async () => {
 		await fetch(`/api/clear`);
-		console.log('clear emmmm');
 		setTimeout(clearStalePeers, 9000);
 	};
 	setTimeout(clearStalePeers, 9000);

@@ -8,13 +8,22 @@
 	import landscapeFragment from '$lib/shaders/landscapeFragment.glsl?raw';
 	import planeVertex from '$lib/shaders/planeVertex.glsl?raw';
 	import planeFragment from '$lib/shaders/planeFragment.glsl?raw';
-	import { cameraPosition, baseHue, baseHue2, baseHue3, hueSpread, saturation } from '$lib/stores';
+	import {
+		cameraPosition,
+		baseHue,
+		baseHue2,
+		baseHue3,
+		hueSpread,
+		saturation,
+		alpha
+	} from '$lib/stores';
 
 	const { camera } = useThrelte();
 	let landscapeMaterial: ShaderMaterial;
 	let landscapeMaterial2: ShaderMaterial;
 	let landscapeMaterial3: ShaderMaterial;
 	let planeMaterial: ShaderMaterial;
+	let planeMaterial2: ShaderMaterial;
 
 	useFrame(({ clock }, delta) => {
 		landscapeMaterial.uniforms.uTime.value += delta;
@@ -30,6 +39,7 @@
 		landscapeMaterial2.uniforms.uSaturation.value = $saturation;
 		landscapeMaterial3.uniforms.uSaturation.value = $saturation;
 		planeMaterial.uniforms.uTime.value += delta;
+		planeMaterial2.uniforms.uAlpha.value = alpha;
 		if (Math.floor(clock.getElapsedTime()) % 2 == 0) {
 			// console.log(`beh ${clock.getElapsedTime()}`);
 		}
@@ -133,7 +143,30 @@
 			bind:ref={planeMaterial}
 			vertexShader={planeVertex}
 			fragmentShader={planeFragment}
-			uniforms={{ uTime: { value: 0.0 } }}
+			uniforms={{ uTime: { value: 0.0 }, uAlpha: { value: 1.0 } }}
+			transparent
+			wireframe
+		/>
+	</T.Mesh>
+	<T.Mesh rotation={[Math.PI * 0.3, Math.PI * 0.4, Math.PI * 0.4]}>
+		<T.PlaneGeometry args={[100, 100, 32, 32]} />
+		<T.ShaderMaterial
+			bind:ref={planeMaterial2}
+			vertexShader={planeVertex}
+			fragmentShader={planeFragment}
+			uniforms={{ uTime: { value: 0.0 }, uAlpha: { value: 0.3 } }}
+			transparent
+			wireframe
+		/>
+	</T.Mesh>
+	<T.Mesh rotation={[Math.PI * 0.4, Math.PI * 0.2, Math.PI * 0.3]}>
+		<T.PlaneGeometry args={[100, 100, 32, 32]} />
+		<T.ShaderMaterial
+			bind:ref={planeMaterial2}
+			vertexShader={planeVertex}
+			fragmentShader={planeFragment}
+			uniforms={{ uTime: { value: 0.0 }, uAlpha: { value: 0.3 } }}
+			transparent
 			wireframe
 		/>
 	</T.Mesh>

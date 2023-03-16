@@ -5,7 +5,6 @@ uniform float uHueSpread;
 uniform float uSaturation;
 
 varying vec2 vUv;
-/* varying float vRandom; */
 varying float vElevation;
 
 // hsl to rgb https://github.com/Jam3/glsl-hsl2rgb/blob/master/index.glsl
@@ -84,44 +83,8 @@ float snoise(vec2 v){
   return 130.0 * dot(m, g);
 }
 
-float rand(vec2 n) { 
-	return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
-}
-
-float noise(vec2 p){
-	vec2 ip = floor(p);
-	vec2 u = fract(p);
-	u = u*u*(3.0-2.0*u);
-	
-	float res = mix(
-		mix(rand(ip),rand(ip+vec2(1.0,0.0)),u.x),
-		mix(rand(ip+vec2(0.0,1.0)),rand(ip+vec2(1.0,1.0)),u.x),u.y);
-	return res*res;
-}
-
-#define NUM_OCTAVES 5
-
-float fbm(vec2 x) {
-	float v = 0.0;
-	float a = 0.5;
-	vec2 shift = vec2(100);
-	// Rotate to reduce axial bias
-    mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.50));
-	for (int i = 0; i < NUM_OCTAVES; ++i) {
-		v += a * noise(x);
-		x = rot * x * 2.0 + shift;
-		a *= 0.5;
-	}
-	return v;
-}
-
 void main()
 {
-  /* float colorR = clamp(snoise(vec2(vUv.x + sin(uTime * 0.12), vUv.y + cos(uTime * 0.009))), 0., 1.);
-  float colorG = clamp(snoise(vec2(vUv.y + sin(uTime * 0.10), vUv.x + cos(uTime * 0.07))), 0.9, 1.);
-  float colorB = clamp(snoise(vec2(vUv.x + cos(uTime * 0.06), vUv.y + sin(uTime * 0.05))), 0., 1.);
-  gl_FragColor = vec4(colorR * vElevation, colorG * vElevation, colorB * vElevation, 1.0); */
-  /* vec2 fbmvUv = vec2(fbm(vUv.xx),fbm(vUv.yy)); */
   float hue = snoise(vec2(vUv.x + sin(uTime * 0.10), vUv.y + cos(uTime * 0.06))) * uHueSpread + uBaseHue;
   gl_FragColor = vec4(hsl2rgb(hue, uSaturation, 0.5),1.0);
 }

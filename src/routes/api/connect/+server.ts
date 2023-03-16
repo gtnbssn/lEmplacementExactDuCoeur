@@ -28,6 +28,7 @@ const createUser = async (request: RequestEvent) => {
     'lat/lon': new GeoPoint(Number(latLon[0]), Number(latLon[1])),
     online: true,
     connectTimestamp: Timestamp.now(),
+    pingTimestamp: Timestamp.now(),
     peerid: request.url.searchParams.get('peerid')
   });
 

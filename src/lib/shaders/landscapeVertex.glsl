@@ -1,12 +1,5 @@
-/* uniform mat4 projectionMatrix; */
-/* uniform mat4 viewMatrix; */
-/* uniform mat4 modelMatrix; */
-/* attribute vec3 position; */
-/* attribute vec2 uv; */
 uniform vec2 uFrequency;
 uniform float uTime;
-
-// attribute float aRandom;
 
 varying vec2 vUv;
 varying float  vElevation;
@@ -48,10 +41,6 @@ void main()
   float elevation = snoise(vec2(modelPosition.x * 0.5, modelPosition.z * 0.45))
     * snoise(vec2(uv.x * 0.1 + sin(uTime * 0.12), uv.y * 2. + cos(uTime * 0.14)))
     * 0.5;
-  /* float elevation = aRandom * 0.04;
-  elevation += sin(modelPosition.x * uFrequency.x + uTime) * 0.1;
-  elevation += sin(modelPosition.y * uFrequency.y + uTime) * 0.1;
-  modelPosition.z += elevation; */
   modelPosition.y += elevation;
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
@@ -59,6 +48,5 @@ void main()
   gl_Position = projectedPosition;
 
   vUv = uv;
-  /* vRandom = aRandom; */
   vElevation = (elevation + 0.5) * 1.;
 }

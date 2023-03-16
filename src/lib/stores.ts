@@ -19,7 +19,6 @@ export const cameraPosition = tweened(startPosition, {
   duration: 6000,
   easing: sineInOut
 });
-// export const cameraPosition = writable(startPosition)
 
 export const monochrome = writable(0);
 
@@ -47,6 +46,11 @@ export const saturation = tweened(0.5, {
   duration: 800,
   easing: sineInOut
 });
+
+export const alpha = spring(0, {
+  stiffness: 0.07,
+  damping: 0.4
+})
 
 export const sendMessageToPeers = (message: string, peerConnections: DataConnection[]) => {
   peerConnections.forEach((peerConnection) => peerConnection.send(message));
