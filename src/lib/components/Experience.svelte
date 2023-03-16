@@ -54,12 +54,12 @@
 	]}
 	fov={24}
 >
-	<OrbitControls
-		maxPolarAngle={degToRad(180)}
-		enableZoom={true}
-		target={{ y: 0.5 }}
-		enableDamping
-	/>
+	<!-- <OrbitControls -->
+	<!-- 	maxPolarAngle={degToRad(180)} -->
+	<!-- 	enableZoom={true} -->
+	<!-- 	target={{ y: 0.5 }} -->
+	<!-- 	enableDamping -->
+	<!-- /> -->
 </T.PerspectiveCamera>
 
 <T.Mesh position={[0, 10, 0]} rotation.x={-Math.PI * 0.5}>
