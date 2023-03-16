@@ -37,4 +37,26 @@
 </svg>
 
 <style>
+	svg {
+		width: 20px;
+		height: 20px;
+		margin-right: 7px;
+	}
+	button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: auto;
+		padding: 1em 2em;
+		color: #eee;
+		text-align: center;
+		background-color: rgba(255, 255, 255, 0.1);
+		-webkit-backdrop-filter: blur(24px);
+		backdrop-filter: blur(24px);
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		margin: 1em;
+		border-radius: 1em;
+	}
 </style>
