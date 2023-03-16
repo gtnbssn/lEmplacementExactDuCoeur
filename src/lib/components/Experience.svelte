@@ -15,7 +15,8 @@
 		baseHue3,
 		hueSpread,
 		saturation,
-		alpha
+		alpha,
+		planePositionsStore
 	} from '$lib/stores';
 
 	const { camera } = useThrelte();
@@ -25,7 +26,7 @@
 	let planeMaterial: ShaderMaterial;
 	let planeMaterial2: ShaderMaterial;
 
-	useFrame(({ clock }, delta) => {
+	useFrame((_, delta) => {
 		landscapeMaterial.uniforms.uTime.value += delta;
 		landscapeMaterial2.uniforms.uTime.value += delta * 1.2;
 		landscapeMaterial3.uniforms.uTime.value += delta * 0.8;
@@ -39,10 +40,7 @@
 		landscapeMaterial2.uniforms.uSaturation.value = $saturation;
 		landscapeMaterial3.uniforms.uSaturation.value = $saturation;
 		planeMaterial.uniforms.uTime.value += delta;
-		planeMaterial2.uniforms.uAlpha.value = alpha;
-		if (Math.floor(clock.getElapsedTime()) % 2 == 0) {
-			// console.log(`beh ${clock.getElapsedTime()}`);
-		}
+		planeMaterial2.uniforms.uAlpha.value = $alpha;
 	});
 </script>
 
@@ -148,7 +146,7 @@
 			wireframe
 		/>
 	</T.Mesh>
-	<T.Mesh rotation={[Math.PI * 0.3, Math.PI * 0.4, Math.PI * 0.4]}>
+	<T.Mesh rotation={[$planePositionsStore.x1, $planePositionsStore.y1, $planePositionsStore.z1]}>
 		<T.PlaneGeometry args={[100, 100, 32, 32]} />
 		<T.ShaderMaterial
 			bind:ref={planeMaterial2}
@@ -159,7 +157,7 @@
 			wireframe
 		/>
 	</T.Mesh>
-	<T.Mesh rotation={[Math.PI * 0.4, Math.PI * 0.2, Math.PI * 0.3]}>
+	<T.Mesh rotation={[$planePositionsStore.x2, $planePositionsStore.y2, $planePositionsStore.z2]}>
 		<T.PlaneGeometry args={[100, 100, 32, 32]} />
 		<T.ShaderMaterial
 			bind:ref={planeMaterial2}

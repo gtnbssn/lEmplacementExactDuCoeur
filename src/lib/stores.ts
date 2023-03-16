@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 import { tweened, spring } from 'svelte/motion';
-import { cubicOut, sineInOut } from 'svelte/easing';
+import { sineInOut } from 'svelte/easing';
 import type { DataConnection } from 'peerjs';
 
-export const connectionState: {
+const connectionState: {
   firstLoad: boolean;
   peerid: string;
   userid: string;
@@ -50,7 +50,13 @@ export const saturation = tweened(0.5, {
 export const alpha = spring(0, {
   stiffness: 0.07,
   damping: 0.4
-})
+});
+
+const planePositions: {
+  x1: number, y1: number, z1: number, x2: number, y2: number, z2: number
+} = { x1: 0, y1: 0, z1: 0, x2: 0, y2: 0, z2: 0 }
+
+export const planePositionsStore = writable(planePositions);
 
 export const sendMessageToPeers = (message: string, peerConnections: DataConnection[]) => {
   peerConnections.forEach((peerConnection) => peerConnection.send(message));

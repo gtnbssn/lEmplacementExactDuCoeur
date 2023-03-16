@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Peer from 'peerjs';
 	import VisibilityChange from 'svelte-visibility-change';
-	import { connectionStateStore, sendMessageToPeers } from '$lib/stores';
+	import { connectionStateStore, sendMessageToPeers, planePositionsStore } from '$lib/stores';
 	import {
 		monochrome,
 		cameraPosition,
@@ -28,9 +28,18 @@
 	};
 
 	const blink = () => {
+		planePositionsStore.set({
+			x1: Math.random() * Math.PI,
+			y1: Math.random() * Math.PI,
+			z1: Math.random() * Math.PI,
+			x2: Math.random() * Math.PI,
+			y2: Math.random() * Math.PI,
+			z2: Math.random() * Math.PI
+		});
 		monochrome.set(1);
 		setTimeout(() => monochrome.set(0), 250);
-		alpha.set(1);
+		alpha.set(1, { hard: true });
+		setTimeout(() => alpha.set(0, { soft: 0.2 }), 250);
 	};
 	const handleMessage = (message: string) => {
 		console.log(message);
