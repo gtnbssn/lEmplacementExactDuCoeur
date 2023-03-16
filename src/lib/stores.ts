@@ -13,7 +13,7 @@ const connectionState: {
 
 export const connectionStateStore = writable(connectionState);
 
-const startPosition: { x: number, y: number, z: number } = { x: 0, y: 0, z: 65 };
+const startPosition: { x: number, y: number, z: number } = { x: 0, y: 0, z: 62 };
 
 export const cameraPosition = tweened(startPosition, {
   duration: 6000,

@@ -60,9 +60,9 @@
 		$cameraPosition.z + $deviceAcceleration.z * 0.7
 	]}
 	rotation={[
-		cameraRotation.x + $deviceAcceleration.beta,
-		cameraRotation.y + $deviceAcceleration.alpha,
-		cameraRotation.z + $deviceAcceleration.gamma
+		cameraRotation.x + $deviceAcceleration.beta * 2,
+		cameraRotation.y + $deviceAcceleration.alpha * 2,
+		cameraRotation.z + $deviceAcceleration.gamma * 2
 	]}
 	fov={24}
 >
