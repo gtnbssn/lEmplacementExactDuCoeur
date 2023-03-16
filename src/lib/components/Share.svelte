@@ -9,7 +9,7 @@
 	};
 </script>
 
-{#if navigator.share}
+{#if !!navigator.share}
 	<button class="share-button" type="button" title="Share" on:click={shareIt}>
 		<svg>
 			<use href="#share-icon" />
