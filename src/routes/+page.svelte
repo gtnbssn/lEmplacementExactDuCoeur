@@ -15,7 +15,8 @@
 			});
 		}
 	};
-	const start = function () {
+	const start = () => {
+		alert("let's gooo");
 		window.addEventListener('devicemotion', handleMotion);
 	};
 </script>

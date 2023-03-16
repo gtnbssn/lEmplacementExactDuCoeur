@@ -56,7 +56,7 @@
 				cameraPosition.set({ x: $cameraPosition.x, y: newY, z: $cameraPosition.z });
 				break;
 			case '4':
-				const newZ = Math.random() * 40 + 40;
+				const newZ = Math.random() * 40 + 30;
 				cameraPosition.set({ x: $cameraPosition.x, y: $cameraPosition.y, z: newZ });
 				break;
 			case '5':

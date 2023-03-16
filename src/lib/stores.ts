@@ -13,14 +13,14 @@ const connectionState: {
 
 export const connectionStateStore = writable(connectionState);
 
-const startPosition: { x: number, y: number, z: number } = { x: 0, y: 0, z: 70 };
+const startPosition: { x: number, y: number, z: number } = { x: 0, y: 0, z: 60 };
 
 export const cameraPosition = tweened(startPosition, {
   duration: 6000,
   easing: sineInOut
 });
 
-const startDeviceAcceleration: { x: number, y: number, z: number } = { x: 0, y: 0, z: 70 };
+const startDeviceAcceleration: { x: number, y: number, z: number } = { x: 0, y: 0, z: 0 };
 
 export const deviceAcceleration = writable(startDeviceAcceleration);
 
