@@ -18,13 +18,11 @@
 			});
 		}
 	};
-	const start = () => {
-		alert(DeviceMotionEvent.requestPermission);
+	const startMotionEvents = () => {
 		if (typeof DeviceMotionEvent.requestPermission === 'function') {
 			DeviceMotionEvent.requestPermission()
 				.then((response) => {
 					if (response == 'granted') {
-						alert('granted');
 						window.addEventListener('devicemotion', handleMotion);
 					}
 				})
@@ -36,7 +34,7 @@
 </script>
 
 <PeerSetup />
-<div on:click|once|stopPropagation|preventDefault={start}>
+<div on:click|once|stopPropagation|preventDefault={startMotionEvents}>
 	<Canvas shadows={false} rendererParameters={{ antialias: false }}>
 		<Experience />
 		<Perf />

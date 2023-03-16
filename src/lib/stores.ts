@@ -25,8 +25,8 @@ const startDeviceAcceleration: {
 } = { x: 0, y: 0, z: 0, alpha: 0, beta: 0, gamma: 0 };
 
 export const deviceAcceleration = spring(startDeviceAcceleration, {
-  stiffness: 0.17,
-  damping: 0.4
+  stiffness: 0.03,
+  damping: 0.2
 });
 
 export const monochrome = writable(0);
