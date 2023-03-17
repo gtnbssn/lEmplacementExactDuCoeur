@@ -3,7 +3,6 @@
 	import PeerSetup from '$lib/components/PeerSetup.svelte';
 	import Experience from '$lib/components/Experience.svelte';
 	import Share from '$lib/components/Share.svelte';
-	import Perf from '$lib/components/perf.svelte';
 	import { deviceAcceleration } from '$lib/stores';
 
 	const handleMotion = (evt: DeviceMotionEvent) => {
@@ -38,7 +37,6 @@
 <div on:click|once|stopPropagation|preventDefault={startMotionEvents}>
 	<Canvas shadows={false} rendererParameters={{ antialias: false }}>
 		<Experience />
-		<Perf />
 	</Canvas>
 	<Share />
 </div>
