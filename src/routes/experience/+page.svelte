@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
-  import Experience from "$lib/components/Experience.svelte";
+	import Experience from '$lib/components/Experience.svelte';
+	import Share from '$lib/components/Share.svelte';
 </script>
 
 <div>
 	<Canvas shadows={false} rendererParameters={{ antialias: false }}>
-    <Experience />
-  </Canvas>
+		<Experience />
+	</Canvas>
+	<Share />
 </div>
 
 <style>

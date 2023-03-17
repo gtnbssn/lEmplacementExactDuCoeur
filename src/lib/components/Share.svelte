@@ -30,14 +30,12 @@
 	const shareMessage = shareMessages[Math.floor(Math.random() * shareMessages.length)];
 </script>
 
-{#if !!navigator.share}
-	<button class="share-button" type="button" title="Share" on:click={shareIt}>
-		<svg>
-			<use href="#share-icon" />
-		</svg>
-		<span>{shareMessage}</span>
-	</button>
-{/if}
+<button class="share-button" type="button" title="Share" on:click={shareIt}>
+	<svg>
+		<use href="#share-icon" />
+	</svg>
+	<span>{shareMessage}</span>
+</button>
 
 <svg class="hidden">
 	<defs>
