@@ -7,17 +7,14 @@
 
 	const handleMotion = (evt: DeviceMotionEvent) => {
 		if (evt.acceleration) {
-			deviceAcceleration.set(
-				{
-					x: evt.acceleration.x || 0,
-					y: evt.acceleration.y || 0,
-					z: evt.acceleration.z || 0,
-					alpha: evt.rotationRate?.alpha || 0,
-					beta: evt.rotationRate?.beta || 0,
-					gamma: evt.rotationRate?.gamma || 0
-				},
-				{ soft: 0.5 }
-			);
+			deviceAcceleration.set({
+				x: evt.acceleration.x || 0,
+				y: evt.acceleration.y || 0,
+				z: evt.acceleration.z || 0,
+				alpha: evt.rotationRate?.alpha || 0,
+				beta: evt.rotationRate?.beta || 0,
+				gamma: evt.rotationRate?.gamma || 0
+			});
 		}
 	};
 	const startMotionEvents = () => {
