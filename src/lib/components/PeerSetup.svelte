@@ -157,12 +157,12 @@
 	};
 
 	const handleDisconnect = () => {
+		navigator.sendBeacon(`/api/disconnect?userid=${$connectionStateStore.userid}`);
 		if ($connectionStateStore.firstLoad) {
 			return;
 		}
 		$connectionStateStore.peerConnections.forEach((peerConnection) => peerConnection.close());
 		$connectionStateStore.peerConnections = [];
-		navigator.sendBeacon(`/api/disconnect?userid=${$connectionStateStore.userid}`);
 		console.log('disconnecting');
 		return 'disconnected';
 	};
