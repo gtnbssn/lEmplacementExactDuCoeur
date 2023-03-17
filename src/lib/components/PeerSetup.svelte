@@ -19,7 +19,7 @@
 	let peer: Peer;
 
 	const reset = () => {
-		cameraPosition.set({ x: 0, y: 0, z: 62 });
+		cameraPosition.set({ x: 0, y: 0, z: 68 });
 		baseHue.set(0.7);
 		baseHue2.set(0.5);
 		baseHue3.set(0.2);
