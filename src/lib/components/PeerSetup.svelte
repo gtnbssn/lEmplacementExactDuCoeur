@@ -56,7 +56,7 @@
 				cameraPosition.set({ x: $cameraPosition.x, y: newY, z: $cameraPosition.z });
 				break;
 			case '4':
-				const newZ = Math.random() * 40 + 30;
+				const newZ = Math.random() * 40 + 35;
 				cameraPosition.set({ x: $cameraPosition.x, y: $cameraPosition.y, z: newZ });
 				break;
 			case '5':
@@ -102,7 +102,7 @@
 		});
 	};
 
-	const handleConnect = async () => {
+	const handleConnect = () => {
 		peer = new Peer({
 			config: {
 				iceServers: [
@@ -156,7 +156,7 @@
 		connectPeers(json.peers);
 	};
 
-	const handleDisconnect = async () => {
+	const handleDisconnect = () => {
 		if ($connectionStateStore.firstLoad) {
 			return;
 		}
@@ -167,7 +167,7 @@
 		return 'disconnected';
 	};
 
-	onMount(async () => handleConnect());
+	onMount(() => setTimeout(handleConnect, 1000));
 
 	const delays = [500, 1000, 1500, 2000, 2500, 3000];
 	const messages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -198,6 +198,6 @@
 
 <VisibilityChange
 	bind:state={visibilityState}
-	on:hidden={async () => await handleDisconnect()}
+	on:hidden={() => handleDisconnect()}
 	on:visible={async () => await handleReconnect()}
 />

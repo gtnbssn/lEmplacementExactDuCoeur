@@ -15,7 +15,7 @@
 				beta: evt.rotationRate?.beta || 0,
 				gamma: evt.rotationRate?.gamma || 0
 			},
-			{ soft: 0.3 }
+			{ soft: 0.5 }
 		);
 	};
 	const startMotionEvents = () => {

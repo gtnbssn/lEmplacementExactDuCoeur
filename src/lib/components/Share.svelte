@@ -7,6 +7,27 @@
 			})
 			.then(() => {});
 	};
+	const shareMessages = [
+		'Share',
+		'Relate',
+		'Connect',
+		'Make Friends',
+		'Find Love',
+		'Talk To Me',
+		"Don't Stay Alone",
+		'Create a Bond',
+		'Stay With Me',
+		'Rekindle This Friendship',
+		'Keep Warm',
+		'Create a Community',
+		'Create a Core Memory',
+		'Grow With Others',
+		'Seek Connections',
+		'Keep me Company',
+		'Smile at Someone',
+		'Invite Someone Over'
+	];
+	const shareMessage = shareMessages[Math.floor(Math.random() * shareMessages.length)];
 </script>
 
 {#if !!navigator.share}
@@ -14,7 +35,7 @@
 		<svg>
 			<use href="#share-icon" />
 		</svg>
-		<span>Share</span>
+		<span>{shareMessage}</span>
 	</button>
 {/if}
 
