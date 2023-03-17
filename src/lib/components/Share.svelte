@@ -15,16 +15,16 @@
 		'Find Love',
 		'Talk To Me',
 		"Don't Stay Alone",
-		'Create a Bond',
+		'Create A Bond',
 		'Stay With Me',
-		'Rekindle This Friendship',
-		'Keep Warm',
-		'Create a Community',
-		'Create a Core Memory',
+		'Rekindle A Friendship',
+		'Keep Me Warm',
+		'Create A Community',
+		'Create A Core Memory',
 		'Grow With Others',
 		'Seek Connections',
-		'Keep me Company',
-		'Smile at Someone',
+		'Keep Me Company',
+		'Smile At Someone',
 		'Invite Someone Over'
 	];
 	const shareMessage = shareMessages[Math.floor(Math.random() * shareMessages.length)];

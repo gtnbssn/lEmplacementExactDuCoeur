@@ -26,8 +26,6 @@
 	let planeMaterial: ShaderMaterial;
 	let planeMaterial2: ShaderMaterial;
 
-	let cameraRotation = { x: 0, y: 0, z: 0 };
-
 	useFrame((_, delta) => {
 		landscapeMaterial.uniforms.uTime.value += delta;
 		landscapeMaterial2.uniforms.uTime.value += delta * 1.2;
@@ -43,11 +41,6 @@
 		landscapeMaterial3.uniforms.uSaturation.value = $saturation;
 		planeMaterial.uniforms.uTime.value += delta;
 		planeMaterial2.uniforms.uAlpha.value = $alpha;
-		cameraRotation = {
-			x: $camera.rotation.x,
-			y: $camera.rotation.y,
-			z: $camera.rotation.z
-		};
 	});
 </script>
 
@@ -58,11 +51,6 @@
 		$cameraPosition.x + $deviceAcceleration.x * 0.8,
 		$cameraPosition.y + $deviceAcceleration.y * 0.8,
 		$cameraPosition.z + $deviceAcceleration.z * 0.7
-	]}
-	rotation={[
-		cameraRotation.x + $deviceAcceleration.beta * 2,
-		cameraRotation.y + $deviceAcceleration.alpha * 2,
-		cameraRotation.z + $deviceAcceleration.gamma * 2
 	]}
 	fov={24}
 >
