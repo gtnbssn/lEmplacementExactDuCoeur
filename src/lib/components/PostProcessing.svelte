@@ -3,8 +3,7 @@
 	import { Vector2 } from 'three';
 	import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 	import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass';
-	import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
-	import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
+	import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';
 	import { monochrome } from '$lib/stores';
 
 	const unrealBloomPass = new UnrealBloomPass(new Vector2(256, 256), 2, 2, 0.0);
@@ -12,8 +11,9 @@
 	monochrome.subscribe((value) => {
 		filmPass.uniforms.grayscale.value = value;
 	});
+	const smaaPass = new SMAAPass(window.innerWidth, window.innerHeight);
 </script>
 
 <Pass pass={unrealBloomPass} />
 <Pass pass={filmPass} />
-<Pass pass={new ShaderPass(FXAAShader)} />
+<Pass pass={smaaPass} />
