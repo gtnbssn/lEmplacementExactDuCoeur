@@ -1,5 +1,7 @@
 # l'emplacement exact du cœur, 2023
 
+![A screenshot of the site, showing five shiny blobs of pale light against a wireframe as the backdrop](static/ogImage.png)
+
 https://lemplacementexactducoeur.vercel.app
 
 Interactive generative media installation on 43” screen, WebRTC with peerjs, WebGL with threlte, shaders, SvelteKit, firebase, Coturn
