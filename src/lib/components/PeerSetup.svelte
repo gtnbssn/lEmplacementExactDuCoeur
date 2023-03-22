@@ -95,6 +95,7 @@
 					...$connectionStateStore.peerConnections,
 					dataConnection
 				];
+				blink();
 			});
 			dataConnection.on('data', (data) => {
 				handleMessage(String(data));
