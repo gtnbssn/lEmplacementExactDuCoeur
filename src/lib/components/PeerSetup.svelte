@@ -95,7 +95,7 @@
 					...$connectionStateStore.peerConnections,
 					dataConnection
 				];
-				blink();
+				setTimeout(blink, Math.random() * 1000);
 			});
 			dataConnection.on('data', (data) => {
 				handleMessage(String(data));
