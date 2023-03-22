@@ -20,12 +20,10 @@
 		"@types/uuid": "^9.0.1",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
-		"autoprefixer": "^10.4.13",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"node-ipinfo": "^3.4.0",
-		"postcss": "^8.4.21",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"svelte": "^3.54.0",
@@ -39,11 +37,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"firebase": "^9.17.1",
 		"firebase-admin": "^11.5.0",
 		"peerjs": "^1.4.7",
 		"postprocessing": "^6.30.1",
-		"sveltefire": "^0.2.3",
 		"uuid": "^9.0.0"
 	}
 }
