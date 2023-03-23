@@ -86,7 +86,7 @@
 	};
 
 	const connectPeers = (peers: string[]) => {
-		peers.forEach((peerid) => {
+		peers.forEach((peerid, i) => {
 			const dataConnection = peer.connect(peerid);
 			console.log(`trying to connect to ${dataConnection.peer}`);
 			dataConnection.on('open', () => {
@@ -95,7 +95,7 @@
 					...$connectionStateStore.peerConnections,
 					dataConnection
 				];
-				setTimeout(blink, Math.random() * 1000);
+				setTimeout(blink, Math.random() * i * 300);
 			});
 			dataConnection.on('data', (data) => {
 				handleMessage(String(data));
