@@ -6,7 +6,7 @@
 	import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';
 	import { monochrome } from '$lib/stores';
 
-	const unrealBloomPass = new UnrealBloomPass(new Vector2(256, 256), 2, 2, 0.0);
+	const unrealBloomPass = new UnrealBloomPass(new Vector2(512, 512), 2.0, 2.0, 0.0);
 	const filmPass = new FilmPass(0.47, 0.25, 250, 0);
 	monochrome.subscribe((value) => {
 		filmPass.uniforms.grayscale.value = value;
