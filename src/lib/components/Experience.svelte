@@ -53,6 +53,7 @@
 		$cameraPosition.z + $deviceAcceleration.z * 0.7
 	]}
 	fov={24}
+	far={100}
 >
 	<OrbitControls maxPolarAngle={degToRad(180)} target={{ y: 0 }} enabled={false} enableDamping />
 </T.PerspectiveCamera>
