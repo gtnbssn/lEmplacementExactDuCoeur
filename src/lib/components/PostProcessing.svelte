@@ -2,11 +2,11 @@
 	import { Pass } from '@threlte/core';
 	import { Vector2 } from 'three';
 	import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-	import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass';
+	import { FilmPass } from '$lib/filmPass/FilmPass';
 	import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';
 	import { monochrome } from '$lib/stores';
 
-	const unrealBloomPass = new UnrealBloomPass(new Vector2(1024,1024), 2.0, 2.0, 0.0);
+	const unrealBloomPass = new UnrealBloomPass(new Vector2(1024, 1024), 2.0, 2.0, 0.0);
 	const filmPass = new FilmPass(0.47, 0.25, 250, 0);
 	monochrome.subscribe((value) => {
 		filmPass.uniforms.grayscale.value = value;
