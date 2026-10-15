@@ -2,7 +2,7 @@
 	"name": "skitpeerjs",
 	"version": "0.0.1",
 	"private": true,
-  "packageManager": "pnpm@12.11.2",
+	"packageManager": "pnpm@12.11.2",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^7.0.0",
 		"firebase-admin": "^11.5.0",
 		"peerjs": "^1.4.7",
 		"postprocessing": "^6.30.1",
