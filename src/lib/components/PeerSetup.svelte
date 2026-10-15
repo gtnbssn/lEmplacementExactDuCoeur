@@ -104,14 +104,15 @@
 	};
 
 	const handleConnect = () => {
-		peer = new Peer({
-			config: {
-				iceServers: [
-					{ url: 'stun:coturn.gtnbssn.com:443' },
-					{ url: 'turn:coturn.gtnbssn.com:443', username: 'gtnbssn', credential: 'hatchinmarch' }
-				]
-			}
-		});
+		peer = new Peer();
+		// peer = new Peer({
+		// 	config: {
+		// 		iceServers: [
+		// 			{ url: 'stun:coturn.gtnbssn.com:443' },
+		// 			{ url: 'turn:coturn.gtnbssn.com:443', username: 'gtnbssn', credential: 'hatchinmarch' }
+		// 		]
+		// 	}
+		// });
 		peer.on('open', (id) => {
 			$connectionStateStore.peerid = id;
 			fetch(`/api/connect?peerid=${$connectionStateStore.peerid}`)
